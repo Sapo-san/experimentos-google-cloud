@@ -49,6 +49,13 @@ def main(event, context):
         
     # Creamos cliente de api de storage autenticado
     storage_client = None
+    '''
+    - Si se corre en local, recordar usar .env y json con credenciales
+    
+    - Si se corre en ambiente GCP, agregar variables de entorno por
+    consola o UI a la funcion, json con credenciales no es necesario
+    por que el cliente las obtendria del entorno
+    '''
     if path.isfile(".env"):
         # con credenciales de la cuenta de servicio (archivo .json indicado en .env)
         storage_client = storage.Client.from_service_account_json(
@@ -82,7 +89,7 @@ def main(event, context):
             TARGET_FILENAME, TARGET_BUCKET_NAME
         )
     )
-    
+
     '''
     Aquí es donde se trabajaria con los bytes descargados
     A modo de ejemplo:
